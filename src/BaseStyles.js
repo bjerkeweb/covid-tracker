@@ -9,6 +9,7 @@ export default createGlobalStyle`
     font-smoothing: antialiased;
     margin: 5%;
     color: #1a1a1a;
+    min-height: 100vh;
   }
 
   .container {
