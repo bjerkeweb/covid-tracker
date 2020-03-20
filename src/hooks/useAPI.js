@@ -13,10 +13,14 @@ export default function useAPI({ url, defaultData }) {
       try {
         const res = await fetch( url );
         const json = await res.json();
+        if ( json.error ) {
+          throw new Error();
+        }
         setData( json );
         console.log(json)
       } catch( e ) {
         setError( true );
+        setData(null);
       }
 
       setLoading( false );

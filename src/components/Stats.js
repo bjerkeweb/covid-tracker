@@ -39,6 +39,13 @@ const CardsContainer = styled.div`
   }
 `;
 
+const Error = styled.p`
+  /* background-color: #f4f5f7; */
+  text-align: center;
+  padding: 10px;
+  /* border-radius: 12px; */
+`;
+
 const formatDate = ( date ) => {
   const opts = {
     year: '2-digit',
@@ -54,8 +61,9 @@ export default function Stats({ url, sectionTitle }) {
   const { data, loading, error } = useAPI({ url });
   return (
     <>
+      { error && <Error>No data available</Error> }
       { loading && <p className='text-center'>Loading...</p> }
-      { data && (
+      { data && !loading && (
         <>
           <SectionWrapper>
             <SectionTitle>{ sectionTitle }</SectionTitle>
