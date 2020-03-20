@@ -25,6 +25,11 @@ const Button = styled.button`
   color: rgba(0, 0, 0, 0.547);
   font-weight: 600;
 
+  @media (max-width: 767px) {
+    flex-basis: 1;
+    flex-grow: 1;
+  }
+
   :first-child {
     border-top-left-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -63,6 +68,10 @@ const ButtonContainer = styled.div`
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0.5px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 2px 4px 0px;
   border-radius: 6px;
   display: inline-block;
+
+  @media (max-width: 767px) {
+    display: flex;
+  }
 `;
 
 export default function DetailView({ countryCode }) {
