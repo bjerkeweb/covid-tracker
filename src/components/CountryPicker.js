@@ -56,8 +56,7 @@ export default function CountryPicker() {
           options={options}
           onChange={onSelect}
           styles={customStyles}
-          defaultValue={options[0]}
-          classNamePrefix='test'
+          defaultValue={{value: 'US', label: 'United States'}}
         />
       </Wrapper>
       <Stats
