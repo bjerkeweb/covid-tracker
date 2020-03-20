@@ -11,7 +11,7 @@ const List = styled.ul`
       case 'confirmed':
         return '#f5d58a';
       case 'recovered':
-        return '#a6d9c3';
+        return '#b8e0cf';
       case 'deaths':
         return '#f7babb';
       default:
@@ -22,7 +22,6 @@ const List = styled.ul`
   margin: 0;
   padding: 0;
   overflow: hidden;
-  /* border: 1px solid #eee; */
 
   :empty {
     display: none;
@@ -86,7 +85,7 @@ const Percent = styled.span`
       case 'confirmed':
         return '#f5d58a';
       case 'recovered':
-        return '#a6d9c3';
+        return '#b8e0cf';
       case 'deaths':
         return '#f7babb';
       default:
