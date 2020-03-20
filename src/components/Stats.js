@@ -19,7 +19,7 @@ const SectionTitle = styled.h2`
 `;
 
 const SectionWrapper = styled.div`
-  background: #f9f9f9;
+  background: #f4f5f7;
   border-radius: 12px;
   padding: 35px;
   border: 1px solid #eeeeee;

@@ -26,45 +26,46 @@ const Container = styled.div`
 `;
 
 const Title = styled.h4`
-  font-size: 15px;
-  color: #666;
+  font-size: 14px;
+  color: ${ props => {
+    switch( props.info ) {
+      case 'success':
+        return '#02543f';
+      case 'danger':
+        return '#b60c0c';
+      case 'warning':
+        return '#a44c1f';
+      default:
+        return '';
+    }
+  } };
   font-weight: 500;
-  margin-bottom: 10px;
-
-  :before {
-    position: relative;
-    top: 0;
-    left: 0;
-    content: '';
-    display: inline-block;
-    height: 10px;
-    width: 10px;
-    margin-right: 8px;
-    border-radius: 2px;
-    background-color: ${ props => {
-      switch( props.info ) {
-        case 'warning':
-          return '#ffa502';
-        case 'danger':
-          return '#ff0000';
-        case 'success':
-          return '#008000';
-        default:
-          return '';
-      }
-    } };
-  }
+  margin-top: 0;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: ${ props => {
+    switch( props.info ) {
+      case 'danger':
+        return '#f8dede';
+      case 'success':
+        return '#def8ed';
+      case 'warning':
+        return '#f8e5ba';
+      default:
+        return '';
+    }
+  } };
 `;
 
 const Number = styled.h2`
   font-size: 26px;
-  margin-top: 0;
+  margin-bottom: 10px;
 `;
 
 export default function Card({ title, number, info }) {
   return (
     <Container>
-      <Title info={info}>{ title }</Title>
       <Number info={info}>
         <CountUp
           end={ number }
@@ -72,6 +73,7 @@ export default function Card({ title, number, info }) {
           duration={0.7}
         />
       </Number>
+      <Title info={info}>{ title }</Title>
     </Container>
   )
 }

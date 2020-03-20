@@ -4,17 +4,16 @@ export default createGlobalStyle`
 
   body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background-color: #fcfcfc;
+    ${'' /* background-color: #f4f5f7; */}
     -webkit-font-smoothing: antialiased;
     font-smoothing: antialiased;
     margin: 5%;
-    ${'' /* color: #2a2a2a; */}
+    color: #1a1a1a;
   }
 
   .container {
     margin: 0 auto;
     max-width: 768px;
-    ${'' /* padding: 0 8%; */}
   }
 
   .text-center {
