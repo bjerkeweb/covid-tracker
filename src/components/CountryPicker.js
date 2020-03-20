@@ -45,8 +45,9 @@ for ( const [ key, value ] of Object.entries( countries ) ) {
 
 
 export default function CountryPicker() {
+  const defaultCountryStr = `${ flags.countryCode( 'US' ).emoji } United States`;
   const [ countryCode, setCountryCode ] = useState( 'US' );
-  const [ country, setCountry ] = useState('United States');
+  const [ country, setCountry ] = useState( defaultCountryStr );
 
   const onSelect = ( val ) => {
     setCountry( val.label );
