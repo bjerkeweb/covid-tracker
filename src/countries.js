@@ -240,7 +240,6 @@ const countries = {
   'United Kingdom': "GB",
   'United States Minor Outlying Islands': "UM",
   'Uruguay': "UY",
-  'US': "US",
   'United States': 'US',
   'Uzbekistan': "UZ",
   'Vanuatu': "VU",

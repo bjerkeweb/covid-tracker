@@ -10,7 +10,7 @@ const API_URL = 'https://covid19.mathdro.id/api';
 
 const Wrapper = styled.div`
   margin-bottom: 20px;
-  max-width: 300px;
+  max-width: 325px;
   margin-left: auto;
   margin-right: auto;
 `;
@@ -35,13 +35,13 @@ const customStyles = {
   })
 }
 
-const options = [];
-
-for ( const [ key, value ] of Object.entries( countries ) ) {
-  const flag = flags.countryCode( value );
-  let emoji = flag ? flag.emoji : '';
-  options.push({ value: value, label: `${emoji} ${key}` });
-}
+const selectOptions = Object.entries( countries )
+  .map( ([ label, value ]) => ({ value, label }))
+  .map( ({ value, label }) => {
+    const flag = flags.countryCode( value );
+    const emoji = flag ? flag.emoji : '';
+    return { value, label: `${ emoji } ${ label }` }
+  });
 
 
 export default function CountryPicker() {
@@ -58,10 +58,10 @@ export default function CountryPicker() {
     <>
       <Wrapper>
         <Select
-          options={options}
+          options={selectOptions}
           onChange={onSelect}
           styles={customStyles}
-          defaultValue={options.find( o => o.label.substring( 5 ) === 'United States' )}
+          defaultValue={selectOptions.find( o => o.label.substring( 5 ) === 'United States' )}
         />
       </Wrapper>
       <Stats
