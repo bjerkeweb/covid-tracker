@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import Stats from './Stats';
 import Select from 'react-select';
+import DetailView from './DetailView';
 import styled from 'styled-components';
 
 import flags from 'emoji-flags';
 import countries from '../countries';
-
-const API_URL = 'https://covid19.mathdro.id/api';
+import API_URL from '../api';
 
 const Wrapper = styled.div`
   margin-bottom: 20px;
@@ -68,6 +68,7 @@ export default function CountryPicker() {
         url={ `${ API_URL }/countries/${ countryCode }` }
         sectionTitle={ `${ country }` }
       />
+      <DetailView countryCode={ countryCode } />
     </>
   )
 }

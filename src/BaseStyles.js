@@ -2,6 +2,10 @@ import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
 
+  * {
+    box-sizing: border-box;
+  }
+
   body {
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     ${'' /* background-color: #f4f5f7; */}
@@ -9,7 +13,7 @@ export default createGlobalStyle`
     font-smoothing: antialiased;
     margin: 5%;
     color: #1a1a1a;
-    min-height: 100vh;
+    min-height: 200vh;
   }
 
   .container {

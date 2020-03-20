@@ -59,11 +59,15 @@ const formatDate = ( date ) => {
 
 export default function Stats({ url, sectionTitle }) {
   const { data, loading, error } = useAPI({ url });
+
+  if ( loading ) {
+    return <p className='text-center'>Loading...</p> 
+  }
+
   return (
     <>
       { error && <Error>No data available</Error> }
-      { loading && <p className='text-center'>Loading...</p> }
-      { data && !loading && (
+      { data && (
         <>
           <SectionWrapper>
             <SectionTitle>{ sectionTitle }</SectionTitle>

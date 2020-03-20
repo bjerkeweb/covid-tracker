@@ -20,8 +20,10 @@ const Container = styled.div`
   }
 
   :hover {
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px, rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.05) 0px 10px 20px;
-    transform: translateY(-5px);
+    @media (min-width: 768px) {
+      transform: translateY(-5px);
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px, rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.05) 0px 10px 20px;
+    }
   }
 `;
 

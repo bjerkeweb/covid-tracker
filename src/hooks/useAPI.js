@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export default function useAPI({ url, defaultData }) {
+export default function useAPI({ url, defaultData = null }) {
   const [ data, setData ] = useState( defaultData );
   const [ loading, setLoading ] = useState( false );
   const [ error, setError ] = useState( false );
 
   useEffect( () => {
     (async function fetchData() {
-      console.log( url )
       setError( false );
       setLoading( true );
       try {
@@ -17,7 +16,6 @@ export default function useAPI({ url, defaultData }) {
           throw new Error();
         }
         setData( json );
-        console.log(json)
       } catch( e ) {
         setError( true );
         setData(null);
