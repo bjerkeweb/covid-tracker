@@ -3,6 +3,7 @@ import Stats from './Stats';
 import Select from 'react-select';
 import styled from 'styled-components';
 
+import flags from 'emoji-flags';
 import countries from '../countries';
 
 const API_URL = 'https://covid19.mathdro.id/api';
@@ -37,8 +38,11 @@ const customStyles = {
 const options = [];
 
 for ( const [ key, value ] of Object.entries( countries ) ) {
-  options.push({ value: value, label: key });
+  const flag = flags.countryCode( value );
+  let emoji = flag ? flag.emoji : '';
+  options.push({ value: value, label: `${emoji} ${key}` });
 }
+
 
 export default function CountryPicker() {
   const [ countryCode, setCountryCode ] = useState( 'US' );
@@ -56,7 +60,7 @@ export default function CountryPicker() {
           options={options}
           onChange={onSelect}
           styles={customStyles}
-          defaultValue={{value: 'US', label: 'United States'}}
+          defaultValue={options.find( o => o.label.substring( 5 ) === 'United States' )}
         />
       </Wrapper>
       <Stats
