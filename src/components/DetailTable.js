@@ -126,7 +126,7 @@ export default function DetailTable({ data, loading, category }) {
             return (
               <ListItem key={index} width={percent || 0} category={ category }>
                 <span>
-                  { i.provinceState ? i.provinceState : i.countryRegion } : {" "}
+                  { i.provinceState ? i.provinceState : i.countryRegion }: {" "}
                   <Number>{ i[ category ] }</Number>
                 </span>
                 <Percent category={ category }>{ percent > 0 ? `${ percent }%` : `<1%` }</Percent>
