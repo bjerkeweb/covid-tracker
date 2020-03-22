@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import useAPI from '../hooks/useAPI';
 import DetailTable from './DetailTable';
 import styled from 'styled-components';
@@ -46,12 +46,12 @@ const Button = styled.button`
 
   :hover {
     cursor: pointer;
-    background-color: #f4f5f7;
+    background-color: #f9fafb;
   }
 
   &.active {
     background-color: #f4f5f7;
-    color: rgba(0, 0, 0, 0.847)
+    color: rgba(0, 0, 0, 0.847);
   }
 `;
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
 
 const List = styled.ul`
@@ -122,12 +122,12 @@ export default function DetailTable({ data, loading, category }) {
       <List category={ category }>
         {data &&
           data.map((i, index) => {
-            const percent = Math.round( ( i[ category ] / total ) * 100 );
+            const percent = Math.round( ( i[ category ] / total ) * 100 ) || 0;
             return (
-              <ListItem key={index} width={percent || 0} category={ category }>
+              <ListItem key={index} width={percent} category={ category }>
                 <span>
                   { i.provinceState ? i.provinceState : i.countryRegion }: {" "}
-                  <Number>{ i[ category ] }</Number>
+                  <Number>{ i[ category ].toLocaleString() }</Number>
                 </span>
                 <Percent category={ category }>{ percent > 0 ? `${ percent }%` : `<1%` }</Percent>
               </ListItem>
