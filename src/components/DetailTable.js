@@ -115,6 +115,10 @@ export default function DetailTable({ data, loading, category }) {
     return <p>Loading...</p>;
   }
 
+  if ( !data || !data.length ) {
+    return <p>No data available</p>
+  }
+
   const total = data.reduce( ( acc, curr ) => acc += curr[ category ], 0 );
 
   return (

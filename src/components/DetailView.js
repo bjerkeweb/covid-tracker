@@ -107,7 +107,6 @@ export default function DetailView({ countryCode }) {
               </Button>
             </ButtonContainer>
           </DetailHeader>
-          { !data || !data.length && <p>No data available</p> }
           <DetailTable data={data} loading={loading} category={detailCategory.toLowerCase()} />
         </>
       )}
