@@ -76,7 +76,8 @@ const ButtonContainer = styled.div`
 
 export default function DetailView({ countryCode }) {
   const [ detailCategory, setDetailCategory ] = useState('Confirmed');
-  const { data, loading, error } = useAPI({ url: `${ API_URL }/countries/${ countryCode }/${ detailCategory.toLowerCase() }` });
+  const opts = countryCode === 'US' ? `?level=provinceState` : '';
+  const { data, loading, error } = useAPI({ url: `${ API_URL }/countries/${ countryCode }/${ detailCategory.toLowerCase() }${ opts }` });
 
   return (
     <>
