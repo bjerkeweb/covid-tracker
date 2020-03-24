@@ -132,7 +132,6 @@ const countries = {
   'Macao': "MO",
   'Macedonia': "MK",
   'Madagascar': "MG",
-  'Mainland China': "CN",
   'Malawi': "MW",
   'Malaysia': "MY",
   'Maldives': "MV",
