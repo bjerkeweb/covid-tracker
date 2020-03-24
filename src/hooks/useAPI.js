@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function useAPI({ url, defaultData = null }) {
   const [ data, setData ] = useState( defaultData );
@@ -10,12 +11,8 @@ export default function useAPI({ url, defaultData = null }) {
       setError( false );
       setLoading( true );
       try {
-        const res = await fetch( url );
-        const json = await res.json();
-        if ( json.error ) {
-          throw new Error();
-        }
-        setData( json );
+        const res = await axios.get( url );
+        setData( res.data );
       } catch( e ) {
         setError( true );
         setData(null);
