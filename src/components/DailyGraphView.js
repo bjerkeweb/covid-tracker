@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
 import styled from 'styled-components';
 
@@ -63,18 +63,7 @@ export default function DailyGraphView({ chartData }) {
       ]
     },
     options: {
-      onResize( chart, size ) {
-        if ( size.width < 600 ) {
-          chart.options.scales.yAxes[0].ticks.maxTicksLimit = 5;
-          chart.options.scales.xAxes[0].ticks.maxTicksLimit = 8;
-          chart.update();
-        } else {
-          chart.options.scales.yAxes[0].ticks.maxTicksLimit = 7;
-          chart.options.scales.xAxes[0].ticks.maxTicksLimit = 12;
-          chart.update();
-        }
-      },
-      aspectRatio: 2.5,
+      // aspectRatio: 2.5,
       legend: {
         position: 'bottom',
         align: 'end',
@@ -129,7 +118,24 @@ export default function DailyGraphView({ chartData }) {
           }
         }]
       }
-    }
+    },
+    plugins: [{
+      beforeUpdate( c ) {
+        const width = c.chart.width;
+        const height = c.chart.height;
+        const showTicks = width > 600 ? true : false;
+        const xAxis = c.options.scales.xAxes[0];
+        const yAxis = c.options.scales.yAxes[0];
+        // c.options.scales.yAxes[0].ticks.display = showTicks;
+        // c.options.scales.xAxes[0].ticks.display = showTicks;
+        xAxis.ticks.fontSize = Math.min( ( height * 7 / 100 ), 12 );
+        yAxis.ticks.fontSize = Math.min( ( height * 7 / 100 ), 12 );
+        xAxis.ticks.maxTicksLimit = width > 600 ? 12 : 6;
+        yAxis.ticks.maxTicksLimit = width > 600 ? 7 : 4;
+        c.config.data.datasets[0].pointRadius = width <= 600 ? 0 : 1;
+        c.config.data.datasets[1].pointRadius = width <= 600 ? 0 : 1;
+      }
+    }]
   }
   const chartContainer = useRef( null );
 
