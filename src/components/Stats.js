@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import useAPI from '../hooks/useAPI';
 import Card from './Card';
+import DailyGraph from './DailyGraph';
 
 const Updated = styled.p`
   font-size: 15px;
@@ -57,7 +58,7 @@ const formatDate = ( date ) => {
   return new Date( date ).toLocaleString('en-us', opts);
 }
 
-export default function Stats({ url, sectionTitle }) {
+export default function Stats({ url, sectionTitle, global }) {
   const { data, loading, error } = useAPI({ url });
 
   if ( loading ) {
@@ -77,6 +78,7 @@ export default function Stats({ url, sectionTitle }) {
               <Card title='Recovered' info='success' number={data.recovered.value} />
               <Card title='Deaths' info='danger' number={data.deaths.value} />
             </CardsContainer>
+            { global && <DailyGraph /> }
           </SectionWrapper>
         </>
       )}
