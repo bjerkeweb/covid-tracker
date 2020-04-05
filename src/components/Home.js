@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import Header from './Header';
 import Stats from './Stats';
@@ -10,7 +11,7 @@ export default function Home() {
   return (
     <main className="container">
       <Header />
-      <Stats url={ API_URL } sectionTitle="Global Cases" />
+      <Stats url={ API_URL } sectionTitle="Global Cases" global={true} />
       <CountryPicker />
     </main>
   )
