@@ -112,7 +112,15 @@ export default function DailyGraphView({ chartData }) {
         }],
         yAxes: [{
           ticks: {
-            callback: val => val.toLocaleString(),
+            callback: val => {
+              if ( val > 0 && val >= 1000 && val < 1000000 ) {
+                return (val/1000).toLocaleString() + 'K'
+              }
+              if ( val > 0 && val >= 1000000 ) {
+                return ( val/1000000 ) + 'M'
+              }
+              return val;
+            },
             autoSkipLimit: true,
             maxTicksLimit: 7
           }
