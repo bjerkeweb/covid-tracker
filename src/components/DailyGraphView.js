@@ -3,7 +3,106 @@ import Chart from 'chart.js';
 import styled from 'styled-components';
 
 const GraphContainer = styled.div`
-  margin-top: 30px;
+  margin-top: 20px;
+  /* background: #627284; */
+  background: #fff;
+  padding: 25px 15px 0;
+  border-radius: 12px;
+  /* box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15); */
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 0.5px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 2px 4px 0px;
+  @media (max-width: 768px) {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+  transition: all 250ms ease 0s;
+  :hover {
+    @media (min-width: 768px) {
+      transform: translateY(-5px);
+      box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 0px, rgba(0, 0, 0, 0.05) 0px 2px 6px, rgba(0, 0, 0, 0.05) 0px 10px 20px;
+    }
+  }
+`;
+
+const LegendContainer = styled.div`
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const LegendItem = styled.h4`
+  position: relative;
+  :not(:last-of-type) {
+    margin-right: 20px; 
+  }
+  display: inline-block;
+  font-size: 12px;
+  /* color: ${ props => {
+    switch( props.info ) {
+      case 'success':
+        return '#02543f';
+      case 'danger':
+        return '#b60c0c';
+      case 'warning':
+        return '#a44c1f';
+      default:
+        return '';
+    }
+  } }; */
+  color: #2a2a2a;
+  font-weight: 500;
+  margin-top: 0;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  /* background-color: ${ props => {
+    switch( props.info ) {
+      case 'danger':
+        return '#f8dede';
+      case 'success':
+        return '#def8ed';
+      case 'warning':
+        return '#f8e5ba';
+      default:
+        return '';
+    }
+  } }; */
+  :before {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: -12px;
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    background: ${ props => {
+      switch( props.info ) {
+      case 'danger':
+        return '#f8dede';
+      case 'success':
+        return '#def8ed';
+      case 'warning':
+        return '#f8e5ba';
+      default:
+        return '';
+      }
+    } };
+    border-width: 1px;
+    border-style: solid;
+    border-color: ${ props => {
+      switch( props.info ) {
+      case 'success':
+        return '#02543f';
+      case 'danger':
+        return '#e192a5';
+      case 'warning':
+        return 'hsla( 42, 90%, 55%, 1 )';
+      default:
+        return '';
+    }
+    } };
+  }
 `;
 
 Chart.defaults.global.defaultFontFamily = '-apple-system, BlinkMacSystemFont, sans-serif';
@@ -42,49 +141,54 @@ export default function DailyGraphView({ chartData }) {
         { 
           data: [...chartData.map( x => x.deaths )],
           label: "Deaths",
-          borderColor: "#db1a1a",
-          backgroundColor: '#fbd0d2',
+          borderColor: "#e192a5",
+          backgroundColor: 'rgba(225, 146, 165, 0.5)',
           // pointBackgroundColor: 'fbd0d2',
           pointRadius: 1,
           fill: true,
-          borderWidth: 0
+          borderWidth: 2
         },
         { 
           data: [...chartData.map( x => x.confirmed )],
           label: "Confirmed",
-          borderColor: "#e4a30c",
-          backgroundColor: '#f9e6ba',
+          borderColor: "hsla( 42, 90%, 70%, 1 )",
+          backgroundColor: 'rgba( 249, 214, 133, 0.5 )',
           fill: true,
           pointBackgroundColor: '#f9e6ba',
           // pointBorderColor: '#a54c1f',
           pointRadius: 1,
-          borderWidth: 0
+          borderWidth: 2
         }
       ]
     },
     options: {
-      // aspectRatio: 2.5,
+      aspectRatio: 2.75,
       legend: {
+        display: false,
         position: 'bottom',
         align: 'end',
         labels: {
-          fontStyle: 'bold'
+          fontStyle: 'bold',
+          // fontColor: '#fff'
         }        
       },
       tooltips: {
         mode: 'index',
         position: 'average',
         cornerRadius: 4,
+        displayColors: false,
         caretSize: 8,
         intersect: false,
         itemSort: (a, b, data) => b.yLabel - a.yLabel,
         xPadding: 10,
         yPadding: 10,
-        backgroundColor: 'rgba( 0, 0, 0, 0.8 )',
+        // backgroundColor: 'rgba( 0, 0, 0, 0.8 )',
+        backgroundColor: 'rgba( 31, 50, 71, 0.95 )',
         bodySpacing: 4,
-        bodyFontStyle: 'bold',
+        // bodyFontStyle: 'bold',
         multiKeyBackground: 'rgba(0,0,0,0)',
         borderWidth: 0,
+        borderColor: 'rgba(255, 255, 255, 0.7)',
         callbacks: {
           labelColor: ( tooltipItem, chart ) => ({
             backgroundColor: config.data.datasets[tooltipItem.datasetIndex].backgroundColor,
@@ -102,9 +206,24 @@ export default function DailyGraphView({ chartData }) {
       scales: {
         xAxes: [{
           type: 'time',
+          time: {
+            displayFormats: {
+              'millisecond': 'MMM DD',
+              'second': 'MMM DD',
+              'minute': 'MMM DD',
+              'hour': 'MMM DD',
+              'day': 'MMM DD',
+              'week': 'MMM DD',
+              'month': 'MMM DD',
+              'quarter': 'MMM DD',
+              'year': 'MMM DD'
+            }
+          },
           ticks: {
             autoSkip: true,
-            maxTicksLimit: 12
+            maxTicksLimit: 12,
+            // maxRotation: 0
+            // fontColor: 'rgba( 255, 255, 255, 0.7 )'
           },
           gridLines: {
             display: false
@@ -122,7 +241,12 @@ export default function DailyGraphView({ chartData }) {
               return val;
             },
             autoSkipLimit: true,
-            maxTicksLimit: 7
+            maxTicksLimit: 7,
+            // fontColor: 'rgba( 255, 255, 255, 0.7 )'
+          },
+          gridLines: {
+            color: 'rgba( 0, 0, 0, 0.05 )',
+            zeroLineColor: 'rgba( 0, 0, 0, 0.05 )'
           }
         }]
       }
@@ -136,12 +260,14 @@ export default function DailyGraphView({ chartData }) {
         const yAxis = c.options.scales.yAxes[0];
         // c.options.scales.yAxes[0].ticks.display = showTicks;
         // c.options.scales.xAxes[0].ticks.display = showTicks;
-        xAxis.ticks.fontSize = Math.min( ( height * 7 / 100 ), 12 );
-        yAxis.ticks.fontSize = Math.min( ( height * 7 / 100 ), 12 );
+        xAxis.ticks.fontSize = Math.min( ( height * 8 / 100 ), 12 );
+        yAxis.ticks.fontSize = Math.min( ( height * 8 / 100 ), 12 );
         xAxis.ticks.maxTicksLimit = width > 600 ? 12 : 6;
         yAxis.ticks.maxTicksLimit = width > 600 ? 7 : 4;
-        c.config.data.datasets[0].pointRadius = width <= 600 ? 0 : 1;
-        c.config.data.datasets[1].pointRadius = width <= 600 ? 0 : 1;
+        c.config.data.datasets[0].pointRadius = width <= 600 ? 0 : 0;
+        c.config.data.datasets[1].pointRadius = width <= 600 ? 0 : 0;
+        c.config.options.legend.align = width > 600 ? 'end' : 'center';
+        c.config.options.legend.labels.fontSize = width > 600 ? 12 : 11;
       }
     }]
   }
@@ -154,6 +280,10 @@ export default function DailyGraphView({ chartData }) {
   return (
     <GraphContainer>
       <canvas ref={ chartContainer } />
+      <LegendContainer>
+        <LegendItem info="danger">Deaths</LegendItem>
+        <LegendItem info="warning">Confirmed</LegendItem>
+      </LegendContainer>
     </GraphContainer>
   )
 }
