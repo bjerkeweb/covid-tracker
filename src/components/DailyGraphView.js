@@ -6,7 +6,7 @@ const GraphContainer = styled.div`
   margin-top: 20px;
   /* background: #627284; */
   background: #fff;
-  padding: 25px 15px 0;
+  padding: 25px 15px 15px;
   border-radius: 12px;
   /* box-shadow: inset 1px 1px 2px rgba(0,0,0,0.15); */
   box-shadow: rgba(0, 0, 0, 0.05) 0px 0.5px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.05) 0px 2px 4px 0px;
@@ -51,7 +51,7 @@ const LegendItem = styled.h4`
   } }; */
   color: #2a2a2a;
   font-weight: 500;
-  margin-top: 0;
+  margin: 0;
   display: inline-block;
   padding: 4px 8px;
   border-radius: 4px;
