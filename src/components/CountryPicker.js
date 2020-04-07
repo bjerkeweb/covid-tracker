@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Stats from './Stats';
 import Select from 'react-select';
 import DetailView from './DetailView';
@@ -43,32 +43,36 @@ const selectOptions = Object.entries( countries )
     return { value, label: `${ emoji } ${ label }` }
   });
 
+function getCountryStr( code, country ) {
+  return `${ flags.countryCode( code ).emoji } ${ country }`;
+}
 
 export default function CountryPicker() {
-  const defaultCountryStr = `${ flags.countryCode( 'US' ).emoji } United States`;
-  const [ countryCode, setCountryCode ] = useState( 'US' );
-  const [ country, setCountry ] = useState( defaultCountryStr );
+  const [ selected, setSelected ] = useState( () => {
+    const fallback = { value: 'US', 'label': getCountryStr( 'US', 'United States' ) };
+    const value = window.localStorage.getItem( 'country' );
+    return value ? JSON.parse( value ) : fallback;
+  } );
 
-  const onSelect = ( val ) => {
-    setCountry( val.label );
-    setCountryCode( val.value );
-  }
+  useEffect( () => {
+    window.localStorage.setItem( 'country', JSON.stringify( selected ) );
+  }, [ selected ] );
   
   return (
     <>
       <Wrapper>
         <Select
           options={selectOptions}
-          onChange={onSelect}
+          onChange={setSelected}
           styles={customStyles}
-          defaultValue={selectOptions.find( o => o.label.substring( 5 ) === 'United States' )}
+          defaultValue={selected}
         />
       </Wrapper>
       <Stats
-        url={ `${ API_URL }/countries/${ countryCode }` }
-        sectionTitle={ `${ country }` }
+        url={ `${ API_URL }/countries/${ selected.value }` }
+        sectionTitle={ `${ selected.label }` }
       />
-      <DetailView countryCode={ countryCode } />
+      <DetailView countryCode={ selected.value } />
     </>
   )
 }
