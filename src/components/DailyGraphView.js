@@ -146,7 +146,7 @@ export default function DailyGraphView({ chartData }) {
           // pointBackgroundColor: 'fbd0d2',
           pointRadius: 1,
           fill: true,
-          borderWidth: 2
+          borderWidth: 1
         },
         { 
           data: [...chartData.map( x => x.confirmed )],
@@ -157,7 +157,7 @@ export default function DailyGraphView({ chartData }) {
           pointBackgroundColor: '#f9e6ba',
           // pointBorderColor: '#a54c1f',
           pointRadius: 1,
-          borderWidth: 2
+          borderWidth: 1
         }
       ]
     },
