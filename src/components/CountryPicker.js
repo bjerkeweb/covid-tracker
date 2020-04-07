@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
 import Stats from './Stats';
 import Select from 'react-select';
 import DetailView from './DetailView';
@@ -48,15 +49,8 @@ function getCountryStr( code, country ) {
 }
 
 export default function CountryPicker() {
-  const [ selected, setSelected ] = useState( () => {
-    const fallback = { value: 'US', 'label': getCountryStr( 'US', 'United States' ) };
-    const value = window.localStorage.getItem( 'country' );
-    return value ? JSON.parse( value ) : fallback;
-  } );
-
-  useEffect( () => {
-    window.localStorage.setItem( 'country', JSON.stringify( selected ) );
-  }, [ selected ] );
+  const fallback = { value: 'US', 'label': getCountryStr( 'US', 'United States' ) };
+  const [ selected, setSelected ] = useLocalStorage( 'country', fallback );
   
   return (
     <>
