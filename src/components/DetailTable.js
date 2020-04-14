@@ -121,6 +121,8 @@ export default function DetailTable({ data, loading, category }) {
 
   const total = data.reduce( ( acc, curr ) => acc += curr[ category ], 0 );
 
+  const formatNum = num => num ? num.toLocaleString() : '';
+
   return (
     <>
       <List category={ category }>
@@ -131,7 +133,7 @@ export default function DetailTable({ data, loading, category }) {
               <ListItem key={index} width={percent} category={ category }>
                 <span>
                   { i.provinceState ? i.provinceState : i.countryRegion }: {" "}
-                  <Number>{ i[ category ].toLocaleString() }</Number>
+                  <Number>{ formatNum( i[ category ] ) }</Number>
                 </span>
                 <Percent category={ category }>{ percent > 0 ? `${ percent }%` : `<1%` }</Percent>
               </ListItem>
